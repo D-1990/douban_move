@@ -1,0 +1,35 @@
+# 电影图片
+//li//div[@class="pic"]/a/img/@src
+# 电影连接
+//li//div[@class="info"]/div[1]/a/@href
+# 电影名称
+//li//div[@class="info"]/div[1]/a/span[1]
+# 电影排名
+//li//div[@class="pic"]/em/text()
+
+# 电影简介
+//div[@id="link-report"]/span[@property="v:summary"]/text()
+//div[@id="link-report"]/span[@class="all hidden"]/text()  # 有展开
+
+# 各个电影详细链接
+//li//div[@class="hd"]/a/@href
+
+
+sql_data = deepcopy(self.sql_data)
+        # 电影名称
+        sql_data['name'] = response.xpath('//li//div[@class="info"]/div[1]/a/span[1]/text()').extract
+        # 电影排名
+        sql_data['rank'] = response.xpath('//li//div[@class="pic"]/em/text()').extract
+        # 电影评分
+        sql_data['grade'] = response.xpath('//li//div[@class="star"]/span[2]/text()').extract
+        # 电影评价
+        sql_data['evaluate'] = response.xpath('//li//p[@class="quote"]/span/text()').extract
+
+ sql_data = response.meta['sql_data']
+    #     # 电影简介
+    #     # 判断有没有需要展开的Js
+    #     if response.xpath('//div[@id="link-report"]/span[@property="v:summary"]/text()'):
+    #         sql_data['intro'] = response.xpath('//div[@id="link-report"]/span[@class="all hidden"]/text()')
+    #     else:
+    #         sql_data['intro'] = response.xpath('//div[@id="link-report"]/span[@property="v:summary"]/text()')
+    #     print(sql_data)
